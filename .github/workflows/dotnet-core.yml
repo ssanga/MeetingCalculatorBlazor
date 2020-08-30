@@ -7,7 +7,8 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  workflow-dispatch
+  workflow-dispatch:
+    branches: [ master ]
 
 env:
   AZURE_WEBAPP_NAME: MeetingCalculator              # set this to your application's name
