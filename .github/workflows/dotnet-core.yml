@@ -1,6 +1,6 @@
 name: .NET Core
 
-#ci attemp #1
+#ci attemp #2
 
 on:
   push:
