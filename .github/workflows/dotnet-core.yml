@@ -1,4 +1,4 @@
-name: .NET Core
+name: MeetingCalculator CI/CD
 
 #https://github.com/actions/starter-workflows/pull/321/files/6455a61f9fc9d2575d1913710ea21eee69a34f25
 
@@ -7,6 +7,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow-dispatch
 
 env:
   AZURE_WEBAPP_NAME: MeetingCalculator              # set this to your application's name
@@ -35,18 +36,17 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
 
     - name: Publish
-      #run: dotnet publish --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-      run: dotnet publish --configuration Release --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-
-    - name: Upload ${{ env.AZURE_WEBAPP_NAME }} Build Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ env.AZURE_WEBAPP_NAME }}
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-
+      run: dotnet publish --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v1
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+     - name: Upload ${{ env.AZURE_WEBAPP_NAME }} Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.AZURE_WEBAPP_NAME }}
+        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
