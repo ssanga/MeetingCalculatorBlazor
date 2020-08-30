@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingCalculator", "MeetingCalculator\MeetingCalculator.csproj", "{ECA18303-0981-4792-97E1-EB6E43F28052}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingCalculator.Tests", "MeetingCalculator.Tests\MeetingCalculator.Tests.csproj", "{64AD22F7-E236-44EB-A681-10558CE17068}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECA18303-0981-4792-97E1-EB6E43F28052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECA18303-0981-4792-97E1-EB6E43F28052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECA18303-0981-4792-97E1-EB6E43F28052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECA18303-0981-4792-97E1-EB6E43F28052}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64AD22F7-E236-44EB-A681-10558CE17068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64AD22F7-E236-44EB-A681-10558CE17068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64AD22F7-E236-44EB-A681-10558CE17068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64AD22F7-E236-44EB-A681-10558CE17068}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78D4094A-977A-4E9E-BC8A-17638514A999}
+	EndGlobalSection
+EndGlobal
