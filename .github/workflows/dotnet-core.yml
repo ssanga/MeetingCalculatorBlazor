@@ -1,6 +1,6 @@
 name: .NET Core
 
-#ci attemp #2
+#https://github.com/actions/starter-workflows/pull/321/files/6455a61f9fc9d2575d1913710ea21eee69a34f25
 
 on:
   push:
@@ -8,27 +8,37 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  AZURE_WEBAPP_NAME: MeetingCalculator              # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: './published'      # set this to the path to your web app project, defaults to the repository root
+  NETCORE_VERSION: '3.1.301'                    # set this to the .NET Core version to use
+
 jobs:
   build:
-
+    name: Build and deploy
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
+    - name: Setup .NET Core SDK ${{ env.NETCORE_VERSION }}
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.301
+        dotnet-version: ${{ env.NETCORE_VERSION }}
+
     - name: Install dependencies
       run: dotnet restore
+
     - name: Build
       run: dotnet build --configuration Release --no-restore
+
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+
     - name: Publish
-      run: dotnet publish
-    - name: Upload MeetingCalculator Build Artifact
+      run: dotnet publish --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+    - name: Upload ${{ env.AZURE_WEBAPP_NAME }} Build Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: MeetingCalculator
-        path: /home/runner/work/MeetingCalculatorBlazor/MeetingCalculatorBlazor/MeetingCalculator/bin/Debug/netcoreapp3.1/publish/
+        name: ${{ env.AZURE_WEBAPP_NAME }}
+        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
