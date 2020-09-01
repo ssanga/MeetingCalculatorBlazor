@@ -32,7 +32,9 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Test
-      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+      run:|
+          cd ./MeetingCalculatorBlazor/MeetingCalculatorBlazor/MeetingCalculator.Tests
+          dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
 
     - name: Publish
       run: dotnet publish --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
@@ -41,7 +43,7 @@ jobs:
       uses: coverallsapp/github-action@v1.0.1
       with:
         github-token: ${{ secrets.MEETINGCALCULATOR }}
-        path-to-lcov: ./TestResults/coverage.info
+        path-to-lcov: ./MeetingCalculatorBlazor/MeetingCalculatorBlazor/MeetingCalculator.Tests/TestResults/coverage.info
       
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v1
