@@ -59,9 +59,9 @@ jobs:
         name: ${{ env.AZURE_WEBAPP_NAME }}
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: Test Results
-        path: TestResults        
-      if: always()
+    #- name: Upload Test Results
+    #  uses: actions/upload-artifact@v1.0.0
+    #  with:
+    #    name: Test Results
+    #    path: TestResults        
+    #  if: always()
