@@ -71,9 +71,9 @@ jobs:
     #    name: Test Results
     #    path: TestResults        
     #  if: always()
-  deploy:
-    name: Fake deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: Fake deploy steps
-      run: pwd
+  #deploy:
+  #  name: Fake deploy
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - name: Fake deploy steps
+  #    run: pwd
