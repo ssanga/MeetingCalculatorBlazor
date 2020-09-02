@@ -33,8 +33,10 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
 
-    - name: Test
-    #  run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+    - name: Test unit tests and integration tests
+      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+      
+    - name: Test with coverage
       run: |
         pwd
         ls
@@ -44,7 +46,7 @@ jobs:
     - name: Publish coverage report to coveralls.io
       uses: coverallsapp/github-action@v1.0.1
       with:
-        github-token: ${{ secrets.MEETINGCALCULATOR }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         path-to-lcov: ./MeetingCalculator.Tests/TestResults/coverage.info
 
     - name: Publish
