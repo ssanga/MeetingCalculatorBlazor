@@ -36,14 +36,16 @@ jobs:
     - name: Test
     #  run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
       run: |
-        cd ./home/runner/work/MeetingCalculatorBlazor/MeetingCalculator.Tests/
+        pwd
+        ls
+        cd /home/runner/work/MeetingCalculatorBlazor/MeetingCalculator.Tests/
         dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
       
     - name: Publish coverage report to coveralls.io
       uses: coverallsapp/github-action@v1.0.1
       with:
         github-token: ${{ secrets.MEETINGCALCULATOR }}
-        path-to-lcov: ./home/runner/work/MeetingCalculatorBlazor/MeetingCalculator.Tests/TestResults/coverage.info
+        path-to-lcov: /home/runner/work/MeetingCalculatorBlazor/MeetingCalculator.Tests/TestResults/coverage.info
 
     - name: Publish
       run: dotnet publish --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
