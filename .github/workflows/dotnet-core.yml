@@ -1,6 +1,7 @@
 name: MeetingCalculator CI/CD
 
 #https://github.com/actions/starter-workflows/pull/321/files/6455a61f9fc9d2575d1913710ea21eee69a34f25
+#http://www.michalbialecki.com/2020/01/30/pimp-your-repo-with-github-actions/
 
 on:
   push:
@@ -33,16 +34,16 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Test
-      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
-      #run: |
-      #  cd ./MeetingCalculatorBlazor/MeetingCalculator.Tests/
-      #  dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+    #  run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+      run: |
+        cd ./MeetingCalculatorBlazor/MeetingCalculator.Tests/
+        dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
       
-    #- name: Publish coverage report to coveralls.io
-    #  uses: coverallsapp/github-action@v1.0.1
-    #  with:
-    #    github-token: ${{ secrets.MEETINGCALCULATOR }}
-    #    path-to-lcov: ./MeetingCalculatorBlazor/MeetingCalculator.Tests/TestResults/coverage.info
+    - name: Publish coverage report to coveralls.io
+      uses: coverallsapp/github-action@v1.0.1
+      with:
+        github-token: ${{ secrets.MEETINGCALCULATOR }}
+        path-to-lcov: ./MeetingCalculatorBlazor/MeetingCalculator.Tests/TestResults/coverage.info
 
     - name: Publish
       run: dotnet publish --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
@@ -66,3 +67,8 @@ jobs:
     #    name: Test Results
     #    path: TestResults        
     #  if: always()
+  deploy:
+    name: Fake deploy
+    steps:
+    - name: Fake deploy steps
+      run: pwd
