@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MeetingCalculator.Data;
+
 
 namespace MeetingCalculator
 {
@@ -29,7 +29,6 @@ namespace MeetingCalculator
             services.AddHealthChecks();
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<ITimeCalculation, TimeCalculation>();
         }
 
