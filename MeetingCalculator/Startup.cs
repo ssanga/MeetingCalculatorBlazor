@@ -14,7 +14,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace MeetingCalculator
 {
-    [ExcludeFromCodeCoverage]
+    //[ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)
