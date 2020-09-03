@@ -1,8 +1,7 @@
 name: MeetingCalculator CI/CD
 
-# https://github.com/actions/starter-workflows/pull/321/files/6455a61f9fc9d2575d1913710ea21eee69a34f25
-# http://www.michalbialecki.com/2020/01/30/pimp-your-repo-with-github-actions/
-# https://stackoverflow.com/questions/53255065/dotnet-unit-test-with-coverlet-how-to-get-coverage-for-entire-solution-and-not
+#https://github.com/actions/starter-workflows/pull/321/files/6455a61f9fc9d2575d1913710ea21eee69a34f25
+#http://www.michalbialecki.com/2020/01/30/pimp-your-repo-with-github-actions/
 
 on:
   push:
@@ -34,14 +33,21 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
 
-    - name: Test unit tests and integration tests and coverage
-      run: dotnet test --no-restore --verbosity normal --results-directory ../TestResults "/p:CollectCoverage=true" "/p:CoverletOutput=../TestResults/" "/p:MergeWith=../TestResults/coverage.json" "/p:CoverletOutputFormat=lcov"
-        
+    - name: Test unit tests and integration tests
+      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+      
+    - name: Test with coverage
+      run: |
+        pwd
+        ls
+        cd ./MeetingCalculator.Tests/
+        dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+      
     - name: Publish coverage report to coveralls.io
       uses: coverallsapp/github-action@v1.0.1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./TestResults/coverage.info
+        path-to-lcov: ./MeetingCalculator.Tests/TestResults/coverage.info
 
     - name: Publish
       run: dotnet publish --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
