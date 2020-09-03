@@ -9,11 +9,11 @@ namespace MeetingCalculator.Integration.Tests
     // https://github.com/egil/bUnit
     // https://bunit.egilhansen.com/docs/getting-started/writing-csharp-tests.html?tabs=xunit
 
-    public class TimeCalculatorTests : TestContext, IDisposable
+    public class TimeCalculatorComponentTests : TestContext, IDisposable
     {
         private TestContext _ctx;
 
-        public TimeCalculatorTests()
+        public TimeCalculatorComponentTests()
         {
             _ctx = new TestContext();
             _ctx.Services.AddSingleton<ITimeCalculation>(new TimeCalculation());
