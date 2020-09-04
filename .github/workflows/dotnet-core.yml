@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '0 10 * * 1-5'
+    - cron:  '0 11 * * 1-5'
   
 env:
   AZURE_WEBAPP_NAME: MeetingCalculator          # set this to your application's name
