@@ -3,6 +3,7 @@ name: MeetingCalculator CI/CD
 # https://github.com/actions/starter-workflows/pull/321/files/6455a61f9fc9d2575d1913710ea21eee69a34f25
 # http://www.michalbialecki.com/2020/01/30/pimp-your-repo-with-github-actions/
 # https://stackoverflow.com/questions/53255065/dotnet-unit-test-with-coverlet-how-to-get-coverage-for-entire-solution-and-not
+# https://docs.github.com/es/actions/reference/events-that-trigger-workflows
 
 on:
   push:
@@ -10,9 +11,12 @@ on:
   pull_request:
     branches: [ master ]
   workflow_dispatch:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 10 * * 1-5'
   
 env:
-  AZURE_WEBAPP_NAME: MeetingCalculator              # set this to your application's name
+  AZURE_WEBAPP_NAME: MeetingCalculator          # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: './published'      # set this to the path to your web app project, defaults to the repository root
   NETCORE_VERSION: '3.1.301'                    # set this to the .NET Core version to use
 
