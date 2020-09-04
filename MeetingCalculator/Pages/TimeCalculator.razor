@@ -3,22 +3,24 @@
 <div class="form-inline">
 
     <div class="form-group">
-        <label for="NumberOfAttendees">Number of attendees</label>
+        <label for="NumberOfAttendees">Number of attendees:</label>
         <input type="number" @bind-value="@NumberOfAttendees" @bind-value:event="oninput" min="1" max="99" class="form-control" id="NumberOfAttendees">
     </div>
 
     <div class="form-group">
-        <label for=" AvgHourlyRate">Avg. Hourly Rate</label>
+        <label for=" AvgHourlyRate">Avg. Hourly Rate:</label>
         <input type="number" @bind-value="@AvgHourlyRate" @bind-value:event="oninput" min="1" max="1000" class="form-control" id="AvgHourlyRate">
     </div>
 
     <button class="btn btn-primary" id="startButton" @onclick="OnClick">@ButtonTitle</button>
 </div>
 
-<div class="row">
-    <h1>@moneySpent€</h1>
-</div>
+<div class="form">
+    <div class="row">
+        <h1>@moneySpent€</h1>
+    </div>
 
-<div class="row">
-    <h6>@stopWatchValue</h6>
+    <div class="row">
+        <h6>@stopWatchValue</h6>
+    </div>
 </div>
